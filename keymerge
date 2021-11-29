@@ -1,0 +1,15 @@
+#!/bin/bash
+
+file=$1
+m=$2
+
+if [ -z $file ] || [ -z $m ]; then
+    echo "usage: keymerge <file> <threshold>"
+    exit 1
+fi
+if [ -f $file ]; then
+    echo "output file already exists: $file"
+    exit 1
+fi
+
+cat $file.* | ssss-combine -t $m -q > $file

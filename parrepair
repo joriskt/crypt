@@ -1,0 +1,10 @@
+#!/bin/bash
+
+file=$1
+
+if [ -z $file ]; then
+    echo "usage: $0 <file>"
+    exit 1
+fi
+
+par2 r $file

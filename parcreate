@@ -1,0 +1,40 @@
+#!/bin/bash
+
+file=$1
+factor=$2
+
+if [ -z $file ]; then
+    echo "usage: $0 <file> [factor=2]"
+    exit 1
+fi
+
+if [ ! -f $file ]; then
+    echo "file not found: $file"
+    exit 1
+fi
+
+if [ $(echo $file | wc -c) -le 1 ]; then
+    echo "file name must be longer than 1 character: $file"
+    exit 1
+fi
+
+# Set $factor to default to 2.
+if [ -z $factor ]; then
+    factor=4
+    exit 1
+fi
+
+# Ensure the factor is large enough.
+if [ $factor -lt 2 ]; then
+    echo "factor must be >= 2"
+    exit 1
+fi
+
+size=$(du -b $file | cut -f1)
+size=$(expr $size + 1024 - 1)
+size=$(expr $size / 1024 \* $factor \* 4)
+
+count=$(expr $size / 4)
+
+par2 c -rk$size -n$count -u -a $file
+
