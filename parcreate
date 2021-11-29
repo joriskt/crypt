@@ -4,7 +4,7 @@ file=$1
 factor=$2
 
 if [ -z $file ]; then
-    echo "usage: $0 <file> [factor=2]"
+    echo "usage: parcreate <file> [factor=2]"
     exit 1
 fi
 

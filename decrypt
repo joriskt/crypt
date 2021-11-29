@@ -5,7 +5,7 @@ infile=$2
 outfile=$3
 
 if [ -z $keyfile ]; then
-    echo "usage: $0 <keyfile> [infile] [outfile]"
+    echo "usage: decrypt <keyfile> [infile] [outfile]"
     exit 1
 fi
 
