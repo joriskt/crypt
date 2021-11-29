@@ -1,6 +1,6 @@
 # crypt
 
-This is a collection of a few handy cryptography-related bash scripts that I use.
+A collection of a few personal cryptography-related bash scripts.
 
 - [Dependencies](#dependencies)
 - [Key generation](#key-generation)
@@ -9,8 +9,8 @@ This is a collection of a few handy cryptography-related bash scripts that I use
     - [keysplit](#keysplit)
     - [keymerge](#keymerge)
 - [File parity archives](#file-parity-archives)
-    - [par-create](#par-create)
-    - [par-repaid](#par-repair)
+    - [parcreate](#parcreate)
+    - [parrepair](#parrepair)
 - [Encryption & decryption](#encryption-decryption)
     - [encrypt](#encrypt)
     - [decrypt](#decrypt)
@@ -94,7 +94,7 @@ Creates a parity archive of your file with an optional redudancy multiplier, def
 #### Usage
 Given you have the file `mykey.1` that you want to protect with 400% redundancy:
 ```
-$ ./par-create mykey.1 4
+$ ./parcreate mykey.1 4
 ```
 This will create several files. Make sure to keep **all** of them, __including the original__, to actually achieve the redundancy percentage.
 
