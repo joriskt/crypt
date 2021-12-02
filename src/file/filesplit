@@ -1,0 +1,12 @@
+#!/bin/bash
+
+file=$1
+threshold=$2
+shares=$3
+
+if [ -z $file ] || [ -z $threshold ] || [ -z $shares ]; then
+    echo "usage: keysplit <file> <threshold> <shares>"
+    exit 1
+fi
+
+cat $file | ssss-split -t $threshold -n $shares -Q | split -a 1 -l 1 --numeric-suffixes=1 - $file.

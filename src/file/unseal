@@ -1,0 +1,25 @@
+#!/bin/bash
+
+infile=$1
+
+err() {
+    >&2 echo "$@"
+    exit 1
+}
+
+if [ -z $infile ]; then
+    err "usage: unseal <infile>"
+fi
+if [ ! -f $infile ]; then
+    err "input file does not exist: $infile"
+fi
+
+# Decrypt the aes-256 key using gpg.
+keydata=$(gpg -q -d $infile.key)
+
+# Split the keyfile into it's respective parts.
+key=$(echo -n $keydata | head -c 64)
+iv=$(echo -n $keydata | tail -c 32)
+
+# Decrypt the file.
+openssl aes-256-ctr -d -K $key -iv $iv -in $file.enc -out $file.out

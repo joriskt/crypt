@@ -1,0 +1,29 @@
+#!/bin/bash
+
+file=$1
+ident=$2
+
+err() {
+    >&2 echo "$@"
+    exit 1
+}
+
+if [ -z $file ] || [ -z $ident ]; then
+    err "usage: seal <file> <gpg-identity>"
+fi
+if [ ! -f $file ]; then
+    err "input file does not exist: $file"
+fi
+if [[ $(2>&1 gpg --list-keys $ident > /dev/null) ]]; then
+    err "gpg does not have a public key for identity: $ident"
+fi
+
+# Generate the key and iv we will use.
+key=$(tr -dc '0-9a-f' < /dev/urandom | head -c 64)
+iv=$(tr -dc '0-9a-f' < /dev/urandom | head -c 32)
+
+# Encrypt the file using aes-256 in counter mode.
+openssl aes-256-ctr -K $key -iv $iv -in $file -out $file.enc
+
+# Encrypt and write the key and iv.
+echo -n "$key$iv" | gpg -r $ident -o $file.key -e

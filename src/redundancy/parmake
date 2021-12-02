@@ -4,7 +4,7 @@ file=$1
 factor=$2
 
 if [ -z $file ]; then
-    echo "usage: parcreate <file> [factor=2]"
+    echo "usage: parmake <file> [factor=2]"
     exit 1
 fi
 
@@ -21,7 +21,6 @@ fi
 # Set $factor to default to 2.
 if [ -z $factor ]; then
     factor=4
-    exit 1
 fi
 
 # Ensure the factor is large enough.

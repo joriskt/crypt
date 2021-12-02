@@ -1,9 +1,9 @@
 #!/bin/bash
 
 file=$1
-m=$2
+threshold=$2
 
-if [ -z $file ] || [ -z $m ]; then
+if [ -z $file ] || [ -z $threshold ]; then
     echo "usage: keymerge <file> <threshold>"
     exit 1
 fi
@@ -12,4 +12,4 @@ if [ -f $file ]; then
     exit 1
 fi
 
-cat $file.* | ssss-combine -t $m -q > $file
+cat $file.* | ssss-combine -t $threshold -q > $file

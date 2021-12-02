@@ -3,7 +3,7 @@
 file=$1
 
 if [ -z $file ]; then
-    echo "usage: parrepair <file>"
+    echo "usage: parfix <file>"
     exit 1
 fi
 
